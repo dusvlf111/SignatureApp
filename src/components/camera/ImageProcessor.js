@@ -24,10 +24,10 @@ const ImageProcessor = ({ image, options, onOptionsChange }) => {
 
   const resetToDefaults = () => {
     onOptionsChange({
-      brightness: 10,
-      contrast: 1.2,
-      threshold: 127,
-      morphKernel: 3,
+      brightness: 2,
+      contrast: 1.1,
+      threshold: 200,
+      morphKernel: 2,
       useAdaptiveThreshold: false,
       correctRotation: true
     });
