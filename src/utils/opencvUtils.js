@@ -468,7 +468,7 @@ export class OpenCVLoader {
      * @returns {cv.Mat}
      */
     static rotateImage(src, angle) {
-      const center = new window.cv.Point2f(src.cols / 2, src.rows / 2);
+      const center = new window.cv.Point(src.cols / 2, src.rows / 2);
       const rotMat = window.cv.getRotationMatrix2D(center, angle, 1.0);
       const dst = new window.cv.Mat();
       
