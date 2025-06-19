@@ -44,7 +44,7 @@ function App() {
   }
 
   return (
-    <Router basename={process.env.NODE_ENV === 'production' ? '/stamp-maker-webapp' : ''}>
+    <Router basename={process.env.NODE_ENV === 'production' ? '/SignatureApp' : ''}>
       <div className="app">
         <Header />
         <main className="main-content">
