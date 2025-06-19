@@ -14,7 +14,7 @@
     "sass": "^1.89.2",
     "uuid": "^11.1.0"
   },
-  "homepage": "https://signatureapp.github.io/SignatureApp_v1.0.1",
+  "homepage": "https://dusvlf111.github.io/SignatureApp",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
