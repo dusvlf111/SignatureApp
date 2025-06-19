@@ -1,43 +1,225 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="theme-color" content="#ff6b6b" />
+    <meta name="description" content="전자 서명과 도장을 쉽고 빠르게 만드는 웹앱" />
+    <meta name="keywords" content="전자서명, 도장, 서명, 싸인, 투명배경, PNG" />
+    <meta name="author" content="StampMaker" />
+    
+    <!-- PWA 설정 -->
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
+    
+    <!-- 소셜 미디어 메타 태그 -->
+    <meta property="og:title" content="도장 메이커 - 전자 서명 & 도장 제작" />
+    <meta property="og:description" content="손글씨 서명부터 사진 인식, 커스텀 도장까지 모든 과정이 브라우저에서 안전하게 처리됩니다" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="%PUBLIC_URL%/logo512.png" />
+    
+    <title>도장 메이커 - 전자 서명 & 도장 제작</title>
+    
+    <!-- 폰트 프리로드 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- 모바일 최적화 -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="도장메이커">
+    
+    <!-- 스타일 초기화 -->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+          'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background-color: #f8f9fa;
+        overflow-x: hidden;
+      }
+      
+      /* 로딩 스피너 */
+      .app-loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffffff;
+        z-index: 9999;
+      }
+      
+      .loading-logo {
+        font-size: 60px;
+        margin-bottom: 20px;
+        animation: bounce 1s ease-in-out infinite;
+      }
+      
+      .loading-text {
+        font-size: 18px;
+        color: #666;
+        margin-bottom: 30px;
+      }
+      
+      .loading-spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #ff6b6b;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      @keyframes bounce {
+        0%, 20%, 53%, 80%, 100% {
+          transform: translate3d(0,0,0);
+        }
+        40%, 43% {
+          transform: translate3d(0,-30px,0);
+        }
+        70% {
+          transform: translate3d(0,-15px,0);
+        }
+        90% {
+          transform: translate3d(0,-4px,0);
+        }
+      }
+      
+      /* 스크롤바 스타일링 */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+      }
+      
+      ::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+        border-radius: 4px;
+      }
+      
+      ::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8;
+      }
+      
+      /* 터치 기기 최적화 */
+      @media (hover: none) and (pointer: coarse) {
+        button, a {
+          min-height: 44px;
+          min-width: 44px;
+        }
+      }
+    </style>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <noscript>
+      <div style="text-align: center; padding: 50px; font-family: Arial, sans-serif;">
+        <h2>JavaScript가 필요합니다</h2>
+        <p>이 앱을 사용하려면 JavaScript를 활성화해주세요.</p>
+      </div>
+    </noscript>
+    
+    <!-- 초기 로딩 화면 -->
+    <div id="app-loading" class="app-loading">
+      <div class="loading-logo">📋</div>
+      <div class="loading-text">도장 메이커 로딩 중...</div>
+      <div class="loading-spinner"></div>
+    </div>
+    
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    
+    <!-- OpenCV.js 로드 -->
+    <script>
+      // OpenCV.js 로딩 상태 추적
+      window.openCvReady = false;
+      
+      // 로딩 화면 제거 함수
+      function hideLoadingScreen() {
+        const loadingElement = document.getElementById('app-loading');
+        if (loadingElement) {
+          loadingElement.style.opacity = '0';
+          loadingElement.style.transition = 'opacity 0.5s ease-out';
+          setTimeout(() => {
+            loadingElement.remove();
+          }, 500);
+        }
+      }
+      
+      // React 앱이 마운트된 후 로딩 화면 숨김
+      window.addEventListener('load', () => {
+        // React 앱이 로드될 때까지 최소 1초 대기
+        setTimeout(() => {
+          if (document.getElementById('root').children.length > 0) {
+            hideLoadingScreen();
+          }
+        }, 1000);
+      });
+      
+      // OpenCV.js 설정
+      window.Module = {
+        wasmBinaryFile: '%PUBLIC_URL%/opencv/opencv_js.wasm',
+        onRuntimeInitialized: function() {
+          window.openCvReady = true;
+          console.log('OpenCV.js가 성공적으로 로드되었습니다.');
+          
+          // 커스텀 이벤트 발생
+          window.dispatchEvent(new CustomEvent('opencvReady'));
+        },
+        printErr: function(text) {
+          if (text.includes('wasm streaming compile failed')) {
+            console.warn('WASM 스트리밍 컴파일 실패, 폴백 모드로 전환');
+          }
+        }
+      };
+      
+      // 에러 핸들링
+      window.addEventListener('error', function(e) {
+        if (e.filename && e.filename.includes('opencv')) {
+          console.error('OpenCV.js 로드 중 오류 발생:', e.message);
+        }
+      });
+    </script>
+    
+    <!-- OpenCV.js 비동기 로드 -->
+    <script async src="%PUBLIC_URL%/opencv/opencv.js" 
+            onerror="console.error('OpenCV.js 파일을 찾을 수 없습니다. public/opencv/ 폴더에 파일이 있는지 확인하세요.')">
+    </script>
+    
+    <!-- 서비스 워커 등록 (PWA) -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('%PUBLIC_URL%/sw.js')
+            .then(function(registration) {
+              console.log('SW 등록 성공: ', registration.scope);
+            })
+            .catch(function(registrationError) {
+              console.log('SW 등록 실패: ', registrationError);
+            });
+        });
+      }
+    </script>
   </body>
 </html>

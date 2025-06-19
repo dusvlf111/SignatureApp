@@ -1,0 +1,91 @@
+// src/components/common/Header.scss
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: $header-height;
+  background-color: $color-white;
+  border-bottom: $border-width solid $border-color-light;
+  z-index: $z-index-fixed;
+  box-shadow: $shadow-sm;
+
+  &__content {
+    @include flex-between;
+    height: 100%;
+    padding: 0 $spacing-md;
+
+    @include mobile {
+      padding: 0 $spacing-sm;
+    }
+  }
+
+  &__logo {
+    @include flex-center;
+    gap: $spacing-xs;
+    text-decoration: none;
+    color: $color-primary;
+    font-weight: $font-weight-bold;
+    transition: all $transition-fast;
+
+    &:hover {
+      color: $color-primary-dark;
+      transform: scale(1.05);
+    }
+
+    &-icon {
+      font-size: $font-size-xl;
+    }
+
+    &-text {
+      font-size: $font-size-lg;
+
+      @include mobile {
+        display: none;
+      }
+    }
+  }
+
+  &__title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: $font-size-md;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin: 0;
+
+    @include mobile {
+      font-size: $font-size-base;
+      left: 60px;
+      transform: none;
+    }
+  }
+
+  &__actions {
+    @include flex-center;
+    gap: $spacing-sm;
+  }
+
+  &__gallery-btn {
+    @include flex-center;
+    width: 40px;
+    height: 40px;
+    border-radius: $border-radius-md;
+    background-color: $color-gray-100;
+    text-decoration: none;
+    transition: all $transition-fast;
+
+    &:hover {
+      background-color: $color-gray-200;
+      transform: scale(1.1);
+    }
+
+    &-icon {
+      font-size: $font-size-lg;
+    }
+  }
+}

@@ -1,0 +1,313 @@
+// src/pages/HandwritingSignature.scss
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.handwriting-signature {
+  padding-top: $header-height;
+  min-height: 100vh;
+  background-color: $color-background-light;
+
+  &__header {
+    text-align: center;
+    padding: $spacing-xl 0;
+    background-color: $color-white;
+    border-bottom: $border-width solid $border-color-light;
+  }
+
+  &__title {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    color: $color-text-primary;
+    margin-bottom: $spacing-sm;
+
+    @include mobile {
+      font-size: $font-size-xl;
+    }
+  }
+
+  &__description {
+    font-size: $font-size-base;
+    color: $color-text-secondary;
+    line-height: $line-height-relaxed;
+    max-width: 600px;
+    margin: 0 auto;
+
+    @include mobile {
+      font-size: $font-size-sm;
+      padding: 0 $spacing-md;
+    }
+  }
+
+  &__content {
+    padding: $spacing-xl 0;
+    @include flex-column;
+    gap: $spacing-xl;
+
+    @include mobile {
+      padding: $spacing-lg 0;
+      gap: $spacing-lg;
+    }
+  }
+
+  &__settings {
+    @include card-base;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: $spacing-lg;
+    align-items: end;
+
+    @include mobile {
+      grid-template-columns: 1fr;
+      gap: $spacing-md;
+    }
+
+    .settings-group {
+      @include flex-column;
+      gap: $spacing-xs;
+    }
+
+    .settings-label {
+      font-size: $font-size-sm;
+      font-weight: $font-weight-medium;
+      color: $color-text-secondary;
+    }
+
+    .color-picker {
+      width: 60px;
+      height: 40px;
+      border: $border-width solid $border-color;
+      border-radius: $border-radius-md;
+      cursor: pointer;
+      transition: all $transition-fast;
+
+      &:hover {
+        border-color: $color-primary;
+        transform: scale(1.05);
+      }
+    }
+
+    .range-slider {
+      @include input-base;
+      padding: 0;
+      height: 40px;
+      background: linear-gradient(to right, $color-gray-200, $color-primary);
+      outline: none;
+      cursor: pointer;
+
+      &::-webkit-slider-thumb {
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: $color-primary;
+        cursor: pointer;
+        box-shadow: $shadow-sm;
+      }
+
+      &::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: $color-primary;
+        cursor: pointer;
+        border: none;
+        box-shadow: $shadow-sm;
+      }
+    }
+
+    .range-value {
+      font-size: $font-size-xs;
+      color: $color-text-muted;
+      font-weight: $font-weight-medium;
+      text-align: center;
+      padding: $spacing-xs;
+      background-color: $color-gray-100;
+      border-radius: $border-radius-sm;
+      min-width: 40px;
+    }
+
+    .settings-checkbox {
+      @include flex-center;
+      gap: $spacing-xs;
+      cursor: pointer;
+      font-size: $font-size-sm;
+      color: $color-text-secondary;
+      user-select: none;
+
+      input[type="checkbox"] {
+        @include visually-hidden;
+      }
+
+      .checkmark {
+        position: relative;
+        width: 20px;
+        height: 20px;
+        border: 2px solid $border-color;
+        border-radius: $border-radius-sm;
+        transition: all $transition-fast;
+
+        &::after {
+          content: '';
+          position: absolute;
+          top: 2px;
+          left: 6px;
+          width: 6px;
+          height: 10px;
+          border: solid $color-white;
+          border-width: 0 2px 2px 0;
+          transform: rotate(45deg);
+          opacity: 0;
+          transition: opacity $transition-fast;
+        }
+      }
+
+      input:checked + .checkmark {
+        background-color: $color-primary;
+        border-color: $color-primary;
+
+        &::after {
+          opacity: 1;
+        }
+      }
+
+      &:hover .checkmark {
+        border-color: $color-primary;
+      }
+    }
+  }
+
+  &__canvas-area {
+    @include card-base;
+    @include flex-column;
+    gap: $spacing-md;
+    min-height: 450px;
+
+    @include mobile {
+      min-height: 350px;
+    }
+  }
+
+  .canvas-controls {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-sm;
+    flex-wrap: wrap;
+
+    @include mobile {
+      gap: $spacing-xs;
+    }
+
+    .btn {
+      @include flex-center;
+      gap: $spacing-xs;
+      min-width: 100px;
+
+      @include mobile {
+        min-width: 80px;
+        font-size: $font-size-xs;
+        padding: $spacing-xs;
+      }
+    }
+  }
+
+  &__actions {
+    text-align: center;
+  }
+
+  &__result {
+    @include slide-up;
+  }
+
+  .result-title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    text-align: center;
+    margin-bottom: $spacing-lg;
+  }
+
+  &__help {
+    @include card-base;
+    background-color: rgba($color-info, 0.05);
+    border-left: 4px solid $color-info;
+
+    h3 {
+      font-size: $font-size-md;
+      font-weight: $font-weight-semibold;
+      color: $color-text-primary;
+      margin-bottom: $spacing-md;
+      @include flex-center;
+      gap: $spacing-xs;
+      justify-content: flex-start;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: $spacing-lg;
+
+      li {
+        font-size: $font-size-sm;
+        color: $color-text-secondary;
+        line-height: $line-height-relaxed;
+        margin-bottom: $spacing-sm;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        &::marker {
+          color: $color-info;
+        }
+      }
+    }
+
+    @include mobile {
+      h3 {
+        font-size: $font-size-base;
+      }
+
+      ul {
+        padding-left: $spacing-md;
+
+        li {
+          font-size: $font-size-xs;
+        }
+      }
+    }
+  }
+}
+
+// 로딩 상태 스타일
+.btn:disabled {
+  position: relative;
+  
+  .loading-spinner {
+    margin-right: $spacing-xs;
+  }
+}
+
+// 반응형 최적화
+@include tablet {
+  .handwriting-signature {
+    &__settings {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    &__content {
+      padding: $spacing-lg 0;
+    }
+  }
+}
+
+@include desktop {
+  .handwriting-signature {
+    &__content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    &__settings {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}

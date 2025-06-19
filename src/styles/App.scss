@@ -1,0 +1,153 @@
+// src/styles/App.scss
+@import './variables';
+@import './mixins';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-family-base;
+  background-color: $color-background;
+  color: $color-text-primary;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  .main-content {
+    flex: 1;
+    padding-bottom: $navigation-height;
+    overflow-y: auto;
+  }
+}
+
+.app-loading {
+  @include flex-center;
+  height: 100vh;
+  flex-direction: column;
+  gap: $spacing-md;
+
+  p {
+    font-size: $font-size-lg;
+    color: $color-text-secondary;
+  }
+}
+
+// 반응형 컨테이너
+.container {
+  width: 100%;
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+
+  @include mobile {
+    padding: 0 $spacing-sm;
+  }
+
+  @include tablet {
+    padding: 0 $spacing-lg;
+  }
+
+  @include desktop {
+    padding: 0 $spacing-xl;
+  }
+}
+
+// 공통 버튼 스타일
+.btn {
+  @include button-base;
+  
+  &--primary {
+    @include button-variant($color-primary, $color-white);
+  }
+
+  &--secondary {
+    @include button-variant($color-secondary, $color-white);
+  }
+
+  &--outline {
+    @include button-outline($color-primary);
+  }
+
+  &--disabled {
+    @include button-disabled;
+  }
+
+  &--small {
+    padding: $spacing-xs $spacing-sm;
+    font-size: $font-size-sm;
+  }
+
+  &--large {
+    padding: $spacing-md $spacing-lg;
+    font-size: $font-size-lg;
+  }
+}
+
+// 공통 카드 스타일
+.card {
+  @include card-base;
+  
+  &--elevated {
+    @include card-elevated;
+  }
+
+  &--interactive {
+    @include card-interactive;
+  }
+}
+
+// 공통 입력 필드 스타일
+.input {
+  @include input-base;
+  
+  &--error {
+    @include input-error;
+  }
+
+  &--success {
+    @include input-success;
+  }
+}
+
+// 유틸리티 클래스
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.mt-sm { margin-top: $spacing-sm; }
+.mt-md { margin-top: $spacing-md; }
+.mt-lg { margin-top: $spacing-lg; }
+.mt-xl { margin-top: $spacing-xl; }
+
+.mb-sm { margin-bottom: $spacing-sm; }
+.mb-md { margin-bottom: $spacing-md; }
+.mb-lg { margin-bottom: $spacing-lg; }
+.mb-xl { margin-bottom: $spacing-xl; }
+
+.p-sm { padding: $spacing-sm; }
+.p-md { padding: $spacing-md; }
+.p-lg { padding: $spacing-lg; }
+.p-xl { padding: $spacing-xl; }
+
+.hidden { display: none; }
+.visible { display: block; }
+
+@include mobile {
+  .hidden-mobile { display: none; }
+}
+
+@include tablet {
+  .hidden-tablet { display: none; }
+}
+
+@include desktop {
+  .hidden-desktop { display: none; }
+}

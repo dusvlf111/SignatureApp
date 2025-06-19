@@ -1,0 +1,128 @@
+// 테두리
+$border-radius-xs: 0.125rem; // 2px
+$border-radius-sm: 0.25rem;  // 4px
+$border-radius-md: 0.5rem;   // 8px
+$border-radius-lg: 0;// src/styles/_variables.scss
+
+// 색상 시스템
+$color-primary: #ff6b6b;
+$color-primary-light: #ff8e8e;
+$color-primary-dark: #ff4757;
+
+$color-secondary: #4ecdc4;
+$color-secondary-light: #7ed6cc;
+$color-secondary-dark: #26a69a;
+
+$color-accent: #45b7d1;
+$color-accent-light: #6ec6ff;
+$color-accent-dark: #0288d1;
+
+// 그레이스케일
+$color-white: #ffffff;
+$color-gray-100: #f8f9fa;
+$color-gray-200: #e9ecef;
+$color-gray-300: #dee2e6;
+$color-gray-400: #ced4da;
+$color-gray-500: #adb5bd;
+$color-gray-600: #6c757d;
+$color-gray-700: #495057;
+$color-gray-800: #343a40;
+$color-gray-900: #212529;
+$color-black: #000000;
+
+// 텍스트 색상
+$color-text-primary: $color-gray-900;
+$color-text-secondary: $color-gray-600;
+$color-text-muted: $color-gray-500;
+$color-text-inverse: $color-white;
+
+// 배경 색상
+$color-background: $color-white;
+$color-background-light: $color-gray-100;
+$color-background-dark: $color-gray-800;
+
+// 상태 색상
+$color-success: #28a745;
+$color-warning: #ffc107;
+$color-error: #dc3545;
+$color-info: #17a2b8;
+
+// 폰트
+$font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+$font-family-code: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+
+// 폰트 크기
+$font-size-xs: 0.75rem;   // 12px
+$font-size-sm: 0.875rem;  // 14px
+$font-size-base: 1rem;    // 16px
+$font-size-md: 1.125rem;  // 18px
+$font-size-lg: 1.25rem;   // 20px
+$font-size-xl: 1.5rem;    // 24px
+$font-size-2xl: 1.875rem; // 30px
+$font-size-3xl: 2.25rem;  // 36px
+
+// 폰트 두께
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// 줄 높이
+$line-height-tight: 1.25;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.75;
+
+// 간격
+$spacing-xs: 0.25rem;  // 4px
+$spacing-sm: 0.5rem;   // 8px
+$spacing-md: 1rem;     // 16px
+$spacing-lg: 1.5rem;   // 24px
+$spacing-xl: 2rem;     // 32px
+$spacing-2xl: 3rem;    // 48px
+$spacing-3xl: 4rem;    // 64px
+
+// 테두리
+$border-radius-xs: 0.125rem; // 2px
+$border-radius-sm: 0.25rem;  // 4px
+$border-radius-md: 0.5rem;   // 8px
+$border-radius-lg: 0.75rem;  // 12px
+$border-radius-xl: 1rem;     // 16px
+$border-radius-full: 9999px;
+
+$border-width: 1px;
+$border-color: $color-gray-300;
+$border-color-light: $color-gray-200;
+$border-color-dark: $color-gray-400;
+
+// 그림자
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+// Z-index
+$z-index-dropdown: 1000;
+$z-index-sticky: 1020;
+$z-index-fixed: 1030;
+$z-index-modal-backdrop: 1040;
+$z-index-modal: 1050;
+$z-index-popover: 1060;
+$z-index-tooltip: 1070;
+
+// 레이아웃
+$header-height: 60px;
+$navigation-height: 70px;
+$container-max-width: 1200px;
+
+// 브레이크포인트
+$breakpoint-mobile: 576px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 992px;
+$breakpoint-large: 1200px;
+
+// 트랜지션
+$transition-fast: 0.15s ease-in-out;
+$transition-normal: 0.3s ease-in-out;
+$transition-slow: 0.5s ease-in-out;

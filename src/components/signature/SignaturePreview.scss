@@ -1,0 +1,256 @@
+// src/components/signature/SignaturePreview.scss
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.signature-preview {
+  @include card-base;
+  @include card-elevated;
+  margin-top: $spacing-lg;
+
+  &__container {
+    display: grid;
+    gap: $spacing-lg;
+
+    @include desktop {
+      grid-template-columns: 1fr 300px;
+      gap: $spacing-xl;
+    }
+  }
+
+  &__image-container {
+    @include flex-column;
+    gap: $spacing-md;
+  }
+
+  &__image {
+    position: relative;
+    @include flex-center;
+    min-height: 200px;
+    border-radius: $border-radius-md;
+    border: $border-width solid $border-color-light;
+    overflow: hidden;
+
+    &--transparent {
+      background-image: 
+        linear-gradient(45deg, #f0f0f0 25%, transparent 25%),
+        linear-gradient(-45deg, #f0f0f0 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #f0f0f0 75%),
+        linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    }
+
+    &--white {
+      background-color: $color-white;
+    }
+
+    &--dark {
+      background-color: $color-gray-800;
+    }
+
+    &--pattern {
+      background-image: 
+        linear-gradient(45deg, #e3f2fd 25%, transparent 25%),
+        linear-gradient(-45deg, #e3f2fd 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #e3f2fd 75%),
+        linear-gradient(-45deg, transparent 75%, #e3f2fd 75%);
+      background-size: 30px 30px;
+      background-position: 0 0, 0 15px, 15px -15px, -15px 0px;
+    }
+  }
+
+  &__img {
+    max-width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+  }
+
+  &__background-selector {
+    @include flex-between;
+    align-items: center;
+    padding: $spacing-sm;
+    background-color: $color-gray-100;
+    border-radius: $border-radius-md;
+
+    .background-selector__label {
+      font-size: $font-size-sm;
+      font-weight: $font-weight-medium;
+      color: $color-text-secondary;
+    }
+
+    .background-selector__options {
+      display: flex;
+      gap: $spacing-xs;
+    }
+  }
+
+  .background-option {
+    width: 32px;
+    height: 32px;
+    border: 2px solid transparent;
+    border-radius: $border-radius-sm;
+    background: none;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      border-color: $color-primary;
+      transform: scale(1.1);
+    }
+
+    &--active {
+      border-color: $color-primary;
+      box-shadow: 0 0 0 2px rgba($color-primary, 0.2);
+    }
+
+    &__preview {
+      width: 100%;
+      height: 100%;
+      border-radius: $border-radius-xs;
+
+      &--transparent {
+        background-image: 
+          linear-gradient(45deg, #ddd 25%, transparent 25%),
+          linear-gradient(-45deg, #ddd 25%, transparent 25%),
+          linear-gradient(45deg, transparent 75%, #ddd 75%),
+          linear-gradient(-45deg, transparent 75%, #ddd 75%);
+        background-size: 8px 8px;
+        background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
+      }
+
+      &--white {
+        background-color: $color-white;
+        border: 1px solid $border-color;
+      }
+
+      &--dark {
+        background-color: $color-gray-800;
+      }
+
+      &--pattern {
+        background-image: 
+          linear-gradient(45deg, #e3f2fd 25%, white 25%),
+          linear-gradient(-45deg, #e3f2fd 25%, white 25%),
+          linear-gradient(45deg, white 75%, #e3f2fd 75%),
+          linear-gradient(-45deg, white 75%, #e3f2fd 75%);
+        background-size: 8px 8px;
+        background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
+      }
+    }
+  }
+
+  &__info {
+    @include flex-column;
+    gap: $spacing-sm;
+    padding: $spacing-md;
+    background-color: $color-gray-100;
+    border-radius: $border-radius-md;
+
+    .info-item {
+      @include flex-between;
+      padding: $spacing-xs 0;
+      border-bottom: $border-width solid $border-color-light;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .info-label {
+        font-size: $font-size-sm;
+        color: $color-text-secondary;
+        font-weight: $font-weight-medium;
+      }
+
+      .info-value {
+        font-size: $font-size-sm;
+        color: $color-text-primary;
+        font-weight: $font-weight-semibold;
+        text-align: right;
+      }
+    }
+  }
+
+  &__actions {
+    display: grid;
+    gap: $spacing-sm;
+    grid-template-columns: 1fr;
+
+    @include tablet {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include desktop {
+      grid-template-columns: 1fr;
+    }
+
+    .btn {
+      justify-content: center;
+      gap: $spacing-xs;
+    }
+  }
+
+  &__tips {
+    grid-column: 1 / -1;
+    padding: $spacing-md;
+    background-color: rgba($color-info, 0.1);
+    border-radius: $border-radius-md;
+    border-left: 4px solid $color-info;
+
+    h4 {
+      font-size: $font-size-base;
+      font-weight: $font-weight-semibold;
+      color: $color-text-primary;
+      margin-bottom: $spacing-sm;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: $spacing-lg;
+
+      li {
+        font-size: $font-size-sm;
+        color: $color-text-secondary;
+        line-height: $line-height-relaxed;
+        margin-bottom: $spacing-xs;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+// 반응형 조정
+@include mobile {
+  .signature-preview {
+    &__container {
+      gap: $spacing-md;
+    }
+
+    &__actions {
+      grid-template-columns: 1fr;
+    }
+
+    &__image {
+      min-height: 150px;
+    }
+
+    &__tips {
+      padding: $spacing-sm;
+
+      h4 {
+        font-size: $font-size-sm;
+      }
+
+      ul {
+        padding-left: $spacing-md;
+
+        li {
+          font-size: $font-size-xs;
+        }
+      }
+    }
+  }
+}

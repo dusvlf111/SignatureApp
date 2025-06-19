@@ -1,0 +1,290 @@
+// src/components/camera/CameraCapture.scss
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.camera-capture {
+  @include card-base;
+  max-width: 600px;
+  margin: 0 auto;
+
+  &__container {
+    @include flex-column;
+    gap: $spacing-lg;
+  }
+
+  &__video-container {
+    position: relative;
+    border-radius: $border-radius-lg;
+    overflow: hidden;
+    background-color: $color-black;
+  }
+
+  &__video {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-height: 400px;
+    object-fit: cover;
+  }
+
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .capture-guide {
+    @include flex-column-center;
+    height: 100%;
+    gap: $spacing-md;
+
+    .guide-frame {
+      position: relative;
+      width: 200px;
+      height: 150px;
+      border: 2px solid rgba($color-white, 0.5);
+      border-radius: $border-radius-md;
+
+      .guide-corner {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border: 3px solid $color-white;
+
+        &--top-left {
+          top: -3px;
+          left: -3px;
+          border-right: none;
+          border-bottom: none;
+        }
+
+        &--top-right {
+          top: -3px;
+          right: -3px;
+          border-left: none;
+          border-bottom: none;
+        }
+
+        &--bottom-left {
+          bottom: -3px;
+          left: -3px;
+          border-right: none;
+          border-top: none;
+        }
+
+        &--bottom-right {
+          bottom: -3px;
+          right: -3px;
+          border-left: none;
+          border-top: none;
+        }
+      }
+    }
+
+    .guide-text {
+      color: $color-white;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-medium;
+      text-align: center;
+      background-color: rgba($color-black, 0.7);
+      padding: $spacing-xs $spacing-sm;
+      border-radius: $border-radius-md;
+      backdrop-filter: blur(4px);
+    }
+  }
+
+  &__controls {
+    @include flex-between;
+    align-items: center;
+    padding: $spacing-md;
+    background-color: $color-gray-900;
+    border-radius: $border-radius-lg;
+  }
+
+  .control-btn {
+    @include flex-center;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background-color: rgba($color-white, 0.2);
+    color: $color-white;
+    font-size: $font-size-lg;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover:not(:disabled) {
+      background-color: rgba($color-white, 0.3);
+      transform: scale(1.1);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &--secondary {
+      background-color: rgba($color-secondary, 0.8);
+
+      &:hover:not(:disabled) {
+        background-color: $color-secondary;
+      }
+    }
+  }
+
+  .capture-btn {
+    @include flex-center;
+    width: 80px;
+    height: 80px;
+    border: 4px solid $color-white;
+    border-radius: 50%;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover:not(:disabled) {
+      transform: scale(1.1);
+      border-color: $color-primary;
+    }
+
+    &--capturing {
+      animation: pulse 1s ease-in-out infinite;
+    }
+
+    &__inner {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: $color-white;
+      @include flex-center;
+      font-size: $font-size-2xl;
+      transition: all $transition-fast;
+    }
+
+    &:active &__inner {
+      transform: scale(0.9);
+    }
+  }
+
+  &__canvas {
+    display: none;
+  }
+
+  &__tips {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: $spacing-sm;
+    margin-top: $spacing-lg;
+
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+
+    .tip-item {
+      @include flex-center;
+      gap: $spacing-xs;
+      padding: $spacing-sm;
+      background-color: $color-gray-100;
+      border-radius: $border-radius-md;
+      font-size: $font-size-xs;
+      text-align: center;
+
+      .tip-icon {
+        font-size: $font-size-sm;
+      }
+
+      .tip-text {
+        color: $color-text-secondary;
+        font-weight: $font-weight-medium;
+      }
+    }
+  }
+
+  // 에러 및 권한 상태
+  &__error,
+  &__permission {
+    @include flex-column-center;
+    gap: $spacing-md;
+    padding: $spacing-xl;
+    text-align: center;
+    min-height: 300px;
+
+    .error-icon,
+    .permission-icon {
+      font-size: 60px;
+      margin-bottom: $spacing-md;
+    }
+
+    h3 {
+      font-size: $font-size-lg;
+      font-weight: $font-weight-semibold;
+      color: $color-text-primary;
+      margin-bottom: $spacing-sm;
+    }
+
+    p {
+      font-size: $font-size-sm;
+      color: $color-text-secondary;
+      line-height: $line-height-relaxed;
+      max-width: 400px;
+      margin-bottom: $spacing-md;
+    }
+  }
+}
+
+// 애니메이션
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+// 반응형
+@include mobile {
+  .camera-capture {
+    &__video {
+      max-height: 300px;
+    }
+
+    .capture-guide {
+      .guide-frame {
+        width: 150px;
+        height: 120px;
+      }
+
+      .guide-text {
+        font-size: $font-size-xs;
+      }
+    }
+
+    &__controls {
+      padding: $spacing-sm;
+    }
+
+    .control-btn {
+      width: 40px;
+      height: 40px;
+      font-size: $font-size-base;
+    }
+
+    .capture-btn {
+      width: 70px;
+      height: 70px;
+
+      &__inner {
+        width: 50px;
+        height: 50px;
+        font-size: $font-size-xl;
+      }
+    }
+  }
+}
