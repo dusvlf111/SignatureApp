@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/SignatureApp/static/css/main.da2de59b.css",
-    "main.js": "/SignatureApp/static/js/main.07ecbb19.js",
-    "index.html": "/SignatureApp/index.html",
-    "main.da2de59b.css.map": "/SignatureApp/static/css/main.da2de59b.css.map",
-    "main.07ecbb19.js.map": "/SignatureApp/static/js/main.07ecbb19.js.map"
+    "main.css": "/static/css/main.da2de59b.css",
+    "main.js": "/static/js/main.d003f4c9.js",
+    "index.html": "/index.html",
+    "main.da2de59b.css.map": "/static/css/main.da2de59b.css.map",
+    "main.d003f4c9.js.map": "/static/js/main.d003f4c9.js.map"
   },
   "entrypoints": [
     "static/css/main.da2de59b.css",
-    "static/js/main.07ecbb19.js"
+    "static/js/main.d003f4c9.js"
   ]
 }
