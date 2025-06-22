@@ -1,0 +1,314 @@
+// src/pages/PhotoSignature.scss
+@import '../styles/variables';
+@import '../styles/mixins';
+
+.photo-signature {
+  padding-top: $header-height;
+  min-height: 100vh;
+  background-color: $color-background-light;
+
+  &__header {
+    text-align: center;
+    padding: $spacing-xl 0;
+    background-color: $color-white;
+    border-bottom: $border-width solid $border-color-light;
+  }
+
+  &__title {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    color: $color-text-primary;
+    margin-bottom: $spacing-sm;
+
+    @include mobile {
+      font-size: $font-size-xl;
+    }
+  }
+
+  &__description {
+    font-size: $font-size-base;
+    color: $color-text-secondary;
+    line-height: $line-height-relaxed;
+    max-width: 600px;
+    margin: 0 auto;
+
+    @include mobile {
+      font-size: $font-size-sm;
+      padding: 0 $spacing-md;
+    }
+  }
+
+  &__loading {
+    @include flex-column-center;
+    height: 50vh;
+    gap: $spacing-md;
+
+    p {
+      font-size: $font-size-base;
+      color: $color-text-secondary;
+    }
+  }
+
+  &__progress {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-lg;
+    padding: $spacing-xl 0;
+    position: relative;
+
+    @include mobile {
+      gap: $spacing-md;
+      padding: $spacing-lg 0;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: $border-color-light;
+      z-index: 1;
+    }
+
+    .progress-step {
+      @include flex-column-center;
+      gap: $spacing-xs;
+      position: relative;
+      z-index: 2;
+      background-color: $color-background-light;
+      padding: 0 $spacing-sm;
+
+      &__number {
+        @include flex-center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: $color-gray-300;
+        color: $color-white;
+        font-size: $font-size-sm;
+        font-weight: $font-weight-bold;
+        transition: all $transition-fast;
+
+        @include mobile {
+          width: 32px;
+          height: 32px;
+          font-size: $font-size-xs;
+        }
+      }
+
+      &__label {
+        font-size: $font-size-xs;
+        color: $color-text-muted;
+        font-weight: $font-weight-medium;
+        text-align: center;
+        white-space: nowrap;
+
+        @include mobile {
+          font-size: 10px;
+        }
+      }
+
+      &.active {
+        .progress-step__number {
+          background-color: $color-primary;
+          box-shadow: 0 0 0 4px rgba($color-primary, 0.2);
+        }
+
+        .progress-step__label {
+          color: $color-primary;
+        }
+      }
+
+      &.completed {
+        .progress-step__number {
+          background-color: $color-success;
+        }
+
+        .progress-step__label {
+          color: $color-success;
+        }
+      }
+    }
+  }
+
+  &__content {
+    padding: $spacing-xl 0;
+
+    @include mobile {
+      padding: $spacing-lg 0;
+    }
+  }
+
+  &__tips {
+    @include card-base;
+    background-color: rgba($color-info, 0.05);
+    border-left: 4px solid $color-info;
+    margin-bottom: $spacing-lg;
+
+    h3 {
+      font-size: $font-size-md;
+      font-weight: $font-weight-semibold;
+      color: $color-text-primary;
+      margin-bottom: $spacing-md;
+      @include flex-center;
+      gap: $spacing-xs;
+      justify-content: flex-start;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: $spacing-lg;
+
+      li {
+        font-size: $font-size-sm;
+        color: $color-text-secondary;
+        line-height: $line-height-relaxed;
+        margin-bottom: $spacing-sm;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        &::marker {
+          color: $color-info;
+        }
+      }
+    }
+
+    @include mobile {
+      h3 {
+        font-size: $font-size-base;
+      }
+
+      ul {
+        padding-left: $spacing-md;
+
+        li {
+          font-size: $font-size-xs;
+        }
+      }
+    }
+  }
+
+  &__divider {
+    @include flex-center;
+    margin: $spacing-lg 0;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background-color: $border-color;
+    }
+
+    span {
+      background-color: $color-background-light;
+      padding: 0 $spacing-md;
+      font-size: $font-size-sm;
+      color: $color-text-muted;
+      font-weight: $font-weight-medium;
+    }
+  }
+
+  .capture-step,
+  .process-step,
+  .result-step {
+    @include flex-column;
+    gap: $spacing-lg;
+  }
+
+  .file-upload-section {
+    text-align: center;
+
+    .file-input {
+      @include visually-hidden;
+    }
+
+    .file-upload-button {
+      @include button-base;
+      @include button-variant($color-secondary, $color-white);
+      display: inline-flex;
+      gap: $spacing-xs;
+      cursor: pointer;
+    }
+  }
+
+  .process-actions,
+  .result-actions {
+    @include flex-center;
+    gap: $spacing-md;
+    flex-wrap: wrap;
+
+    @include mobile {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+
+  .error-message {
+    @include card-base;
+    background-color: rgba($color-error, 0.1);
+    border-left: 4px solid $color-error;
+    color: $color-error;
+    @include flex-center;
+    gap: $spacing-sm;
+    justify-content: flex-start;
+
+    .error-icon {
+      font-size: $font-size-lg;
+      flex-shrink: 0;
+    }
+  }
+
+  .result-title {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    text-align: center;
+    margin-bottom: $spacing-lg;
+  }
+}
+
+// 단계별 애니메이션
+.capture-step {
+  @include slide-up;
+}
+
+.process-step {
+  @include slide-up;
+  animation-delay: 0.1s;
+}
+
+.result-step {
+  @include slide-up;
+  animation-delay: 0.2s;
+}
+
+// 반응형 최적화
+@include tablet {
+  .photo-signature {
+    &__progress {
+      gap: $spacing-md;
+    }
+
+    &__content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+  }
+}
+
+@include desktop {
+  .photo-signature {
+    &__content {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+  }
+}

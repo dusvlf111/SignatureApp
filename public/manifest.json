@@ -1,0 +1,80 @@
+{
+  "short_name": "도장메이커",
+  "name": "도장 메이커 - 전자 서명 & 도장 제작",
+  "description": "손글씨 서명부터 사진 인식, 커스텀 도장까지 모든 과정이 브라우저에서 안전하게 처리됩니다",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#ff6b6b",
+  "background_color": "#ffffff",
+  "categories": ["productivity", "utilities"],
+  "lang": "ko",
+  "scope": "/",
+  "prefer_related_applications": false,
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "screenshots": [
+    {
+      "src": "screenshot1.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "platform": "narrow",
+      "label": "손글씨 서명 화면"
+    },
+    {
+      "src": "screenshot2.png", 
+      "sizes": "720x540",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "사진 서명 인식 화면"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "손글씨 서명",
+      "short_name": "손글씨",
+      "description": "화면에 직접 서명 작성",
+      "url": "/handwriting",
+      "icons": [{ "src": "favicon.ico", "sizes": "64x64" }]
+    },
+    {
+      "name": "사진 서명",
+      "short_name": "사진",
+      "description": "사진으로 서명 인식",
+      "url": "/photo", 
+      "icons": [{ "src": "favicon.ico", "sizes": "64x64" }]
+    },
+    {
+      "name": "커스텀 도장",
+      "short_name": "도장",
+      "description": "텍스트로 도장 제작",
+      "url": "/stamp",
+      "icons": [{ "src": "favicon.ico", "sizes": "64x64" }]
+    },
+    {
+      "name": "갤러리",
+      "short_name": "갤러리", 
+      "description": "저장된 서명 보기",
+      "url": "/gallery",
+      "icons": [{ "src": "favicon.ico", "sizes": "64x64" }]
+    }
+  ]
+}

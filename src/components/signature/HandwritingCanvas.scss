@@ -1,0 +1,76 @@
+// src/components/signature/HandwritingCanvas.scss
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.handwriting-canvas {
+  position: relative;
+  width: 100%;
+  border: 2px dashed $border-color;
+  border-radius: $border-radius-lg;
+  background-color: $color-white;
+  overflow: hidden;
+  transition: border-color $transition-fast;
+
+  &:hover {
+    border-color: $color-primary;
+  }
+
+  &__canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    cursor: crosshair;
+    background-color: $color-white;
+    
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  &__placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    @include flex-center;
+    pointer-events: none;
+    z-index: 1;
+
+    .placeholder-text {
+      color: $color-text-muted;
+      font-size: $font-size-lg;
+      font-weight: $font-weight-medium;
+      text-align: center;
+      background-color: rgba($color-white, 0.9);
+      padding: $spacing-sm $spacing-md;
+      border-radius: $border-radius-md;
+      border: $border-width solid $border-color-light;
+
+      @include mobile {
+        font-size: $font-size-base;
+      }
+    }
+  }
+
+  // 캔버스가 활성화된 상태일 때 플레이스홀더 숨김
+  &:has(.handwriting-canvas__canvas:active) {
+    .handwriting-canvas__placeholder {
+      opacity: 0;
+    }
+  }
+}
+
+// 터치 기기에서의 스타일 조정
+@media (hover: none) and (pointer: coarse) {
+  .handwriting-canvas {
+    &__canvas {
+      cursor: default;
+    }
+
+    &__placeholder .placeholder-text {
+      font-size: $font-size-base;
+      padding: $spacing-xs $spacing-sm;
+    }
+  }
+}

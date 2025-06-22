@@ -1,0 +1,98 @@
+// src/components/common/Navigation.scss
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.navigation {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: $navigation-height;
+  background-color: $color-white;
+  border-top: $border-width solid $border-color-light;
+  z-index: $z-index-fixed;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+
+  &__container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    height: 100%;
+    max-width: $container-max-width;
+    margin: 0 auto;
+  }
+
+  &__item {
+    @include flex-column-center;
+    gap: $spacing-xs;
+    text-decoration: none;
+    color: $color-text-secondary;
+    transition: all $transition-fast;
+    padding: $spacing-xs;
+    position: relative;
+
+    &:hover {
+      color: $color-primary;
+      background-color: rgba($color-primary, 0.05);
+    }
+
+    &--active {
+      color: $color-primary;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 24px;
+        height: 3px;
+        background-color: $color-primary;
+        border-radius: 0 0 $border-radius-sm $border-radius-sm;
+      }
+
+      .navigation__icon {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  &__icon {
+    font-size: $font-size-xl;
+    transition: transform $transition-fast;
+  }
+
+  &__label {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    text-align: center;
+
+    @include mobile {
+      font-size: 10px;
+    }
+  }
+}
+
+// 다크 테마 지원
+@media (prefers-color-scheme: dark) {
+  .navigation {
+    background-color: $color-gray-800;
+    border-top-color: $color-gray-700;
+
+    &__item {
+      color: $color-gray-300;
+
+      &:hover {
+        color: $color-primary-light;
+        background-color: rgba($color-primary-light, 0.1);
+      }
+
+      &--active {
+        color: $color-primary-light;
+
+        &::before {
+          background-color: $color-primary-light;
+        }
+      }
+    }
+  }
+}
