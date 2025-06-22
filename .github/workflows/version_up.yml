@@ -1,49 +1,52 @@
-name: Create GitHub Release
+name: Auto Tag and GitHub Release
 
 on:
   push:
     branches:
-      - gh-pages
+      - gh_pages  # 네가 사용하는 브랜치 이름으로 바꿔도 됨
 
 jobs:
   release:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      # 레포 체크아웃
+      - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Git 기본 세팅
       - name: Setup Git
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+      # 최신 태그 가져오기
       - name: Get latest tag
         id: get_latest_tag
         run: |
           TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
-          echo "Latest tag is $TAG"
-          echo "::set-output name=tag::$TAG"
+          echo "Latest tag: $TAG"
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
 
-      - name: Calculate next patch version
+      # 다음 패치 버전 계산
+      - name: Calculate next version
         id: next_version
         run: |
           LATEST=${{ steps.get_latest_tag.outputs.tag }}
-          echo "Latest: $LATEST"
-          # 버전에서 숫자만 추출(v1.2.3 -> 1.2.3)
           VER=${LATEST#v}
-          # 각 숫자 분리
           IFS='.' read -r MAJOR MINOR PATCH <<< "$VER"
           PATCH=$((PATCH + 1))
           NEW_TAG="v${MAJOR}.${MINOR}.${PATCH}"
           echo "New tag: $NEW_TAG"
-          echo "::set-output name=new_tag::$NEW_TAG"
+          echo "new_tag=$NEW_TAG" >> $GITHUB_OUTPUT
 
-      - name: Create new git tag
+      # 새 태그 생성 및 푸시
+      - name: Create and push tag
         run: |
           git tag ${{ steps.next_version.outputs.new_tag }}
           git push origin ${{ steps.next_version.outputs.new_tag }}
 
+      # GitHub 릴리즈 생성
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
