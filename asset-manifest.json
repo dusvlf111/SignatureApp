@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/SignatureApp/static/css/main.da2de59b.css",
+    "main.js": "/SignatureApp/static/js/main.6f995646.js",
+    "index.html": "/SignatureApp/index.html",
+    "main.da2de59b.css.map": "/SignatureApp/static/css/main.da2de59b.css.map",
+    "main.6f995646.js.map": "/SignatureApp/static/js/main.6f995646.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.da2de59b.css",
+    "static/js/main.6f995646.js"
+  ]
+}
