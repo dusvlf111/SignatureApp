@@ -1,0 +1,52 @@
+name: Create GitHub Release
+
+on:
+  push:
+    branches:
+      - gh-pages
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Get latest tag
+        id: get_latest_tag
+        run: |
+          TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          echo "Latest tag is $TAG"
+          echo "::set-output name=tag::$TAG"
+
+      - name: Calculate next patch version
+        id: next_version
+        run: |
+          LATEST=${{ steps.get_latest_tag.outputs.tag }}
+          echo "Latest: $LATEST"
+          # 버전에서 숫자만 추출(v1.2.3 -> 1.2.3)
+          VER=${LATEST#v}
+          # 각 숫자 분리
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$VER"
+          PATCH=$((PATCH + 1))
+          NEW_TAG="v${MAJOR}.${MINOR}.${PATCH}"
+          echo "New tag: $NEW_TAG"
+          echo "::set-output name=new_tag::$NEW_TAG"
+
+      - name: Create new git tag
+        run: |
+          git tag ${{ steps.next_version.outputs.new_tag }}
+          git push origin ${{ steps.next_version.outputs.new_tag }}
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.next_version.outputs.new_tag }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
