@@ -17,8 +17,8 @@ jobs:
       # Git 기본 세팅
       - name: Setup Git
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "seoungbin"
+          git config user.email "dusvlf59500@gmail.com"
 
       # 최신 태그 가져오기
       - name: Get latest tag
